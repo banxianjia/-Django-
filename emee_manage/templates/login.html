@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{% static 'plugins\bootstrap-3.4.1-dist\css\bootstrap.min.css' %}"
+    />
+    <style>
+      body {
+        background-color: #64bba0;
+      }
+      .control {
+        width: 340px;
+        background-color: #56c3c8;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 40px;
+      }
+      .item {
+        width: 340px;
+        height: 60px;
+        background-color: #56c3c8;
+        border-radius: 40px;
+      }
+      .item div {
+        width: 170px;
+        height: 60px;
+        display: inline-block;
+        color: black;
+        font-size: 18px;
+        text-align: center;
+        line-height: 60px;
+        cursor: pointer;
+        border-radius: 40px;
+      }
+      .content {
+        width: 100%;
+      }
+      .content div {
+        margin: 20px 30px;
+        display: none;
+        text-align: left;
+      }
+      label {
+        display: block;
+        color: #4a4a4a;
+        margin-top: 30px;
+        margin-bottom: 6px;
+        font-size: 15px;
+        font-weight: bold;
+      }
+      input:-webkit-autofill {
+        transition: background-color 5000s ease-in-out 0s;
+      }
+      .content input[type="text"],
+      .content input[type="password"] {
+        width: 100%;
+        height: 40px;
+        background-color: #56c3c8;
+        border-radius: 3px;
+        padding: 0 10px;
+        box-sizing: border-box;
+        border: none;
+        outline: none;
+      }
+      .content button[type="submit"] {
+        margin: 40px 50px 0;
+        width: 80px;
+        height: 40px;
+        border-radius: 10px;
+        color: #000000;
+        background-color: #3ca7d8;
+        background-image: linear-gradient(
+          to right,
+          rgba(37, 200, 200, 1),
+          rgba(117, 172, 192, 1)
+        );
+        cursor: pointer;
+        letter-spacing: 4px;
+        margin-bottom: 40px;
+        border: none;
+        outline: none;
+        transition: all 0.5s;
+      }
+      .content button[type="submit"]:hover {
+        width: 180px;
+        transition: all 0.5s;
+      }
+      .content button[type="submit"]:active {
+        background-color: #3399cc;
+      }
+      .active {
+        background-color: #52bcbf;
+      }
+      .item div:hover {
+        background-color: #5dd4d8;
+      }
+    </style>
+    <title>联通管理系统</title>
+  </head>
+  <body>
+    <div class="control">
+      <div class="content">
+        <form method="POST" action="#">
+          {% csrf_token %}
+          <div style="display: block">
+            <label>账号</label>
+            <input type="text" name="username" placeholder="username" />
+            <label>密码</label>
+            <input type="password" name="password" placeholder="password" />
+            <label>图片验证码</label>
+            <input
+              type="text"
+              name="code"
+              class="form-sontrol col-xs-7"
+              placeholder="请输入验证码"
+            />
+            <img src="/image/code/" alt="" />
+            <br />
+            <button type="submit">登录</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+  <script src="{% static 'js\jquery-3.6.1.min.js' %}"></script>
+  <script src="{% static 'plugins\bootstrap-3.4.1-dist\js\bootstrap.min.js' %}"></script>
+  <script>
+    m = "{{msg}}";
+    console.log(m);
+    if (m) {
+      alert(m);
+    }
+  </script>
+</html>

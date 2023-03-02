@@ -1,0 +1,70 @@
+{% extends 'layout.html' %} {% block content %}
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">新建员工</h3>
+  </div>
+  <div class="panel-body">
+    <form method="post" action="">
+      {% csrf_token %}
+      <div class="form-group">
+        <label>姓名</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="姓名"
+          name="user"
+        />
+      </div>
+      <div class="form-group">
+        <label>密码</label>
+        <input type="text" class="form-control" placeholder="密码" name="pwd" />
+      </div>
+      <div class="form-group">
+        <label>年龄</label>
+        <input
+          type="number"
+          class="form-control"
+          placeholder="年龄"
+          name="age"
+        />
+      </div>
+      <div class="form-group">
+        <label>薪水</label>
+        <input
+          type="number"
+          class="form-control"
+          placeholder="薪水"
+          name="sa"
+        />
+      </div>
+      <div class="form-group">
+        <label>入职时间</label>
+        <input
+          type="datetime-local"
+          class="form-control"
+          placeholder="入职时间"
+          name="ctime"
+        />
+      </div>
+      <div class="form-group">
+        <label>所属部门</label>
+        <select name="db" id="" class="form-control">
+          {% for obj in depart_list %}
+          <option value="{{ obj.id }}">{{ obj.depart }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
+        <label>性别</label>
+        <select name="sex" id="" class="form-control">
+          {% for item in gender_choices %}
+          <option value="{{ item.0 }}">{{ item.1 }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary">提交</button>
+    </form>
+  </div>
+</div>
+{% endblock content %}

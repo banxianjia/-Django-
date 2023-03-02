@@ -1,0 +1,69 @@
+{% extends 'layout.html' %} {% block content %}
+<div class="container">
+  <div style="margin-bottom: 10px">
+    <a href="/users/add" class="btn btn-success">
+      <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+      新建员工</a
+    >
+    <a href="/users/add_modelform" class="btn btn-success">
+      <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+      新建员工(ModelForm)</a
+    >
+  </div>
+
+  <div class="panel panel-default">
+    <!-- Default panel contents -->
+
+    <div class="panel-heading">
+      <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+      用户列表
+    </div>
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>姓名</th>
+          <th>密码</th>
+          <th>年龄</th>
+          <th>薪水</th>
+          <th>入职时间</th>
+          <th>性别</th>
+          <th>所属部门</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for obj in users_queryset %}
+        <tr>
+          <th scope="row">{{ obj.id }}</th>
+          <td>{{ obj.name }}</td>
+          <td>{{ obj.password }}</td>
+          <td>{{ obj.age }}</td>
+          <td>{{ obj.salary }}</td>
+          <td>{{ obj.creat_time|date:"Y-m-d H:i:s" }}</td>
+          <td>{{ obj.get_gender_display }}</td>
+          <td>{{ obj.depart.depart }}</td>
+          <td>
+            <a href="/users/edit/?nid={{obj.id}}" class="btn btn-primary btn-xs"
+              >编辑</a
+            >
+            <a
+              href="/users/delete/?nid={{obj.id}}"
+              class="btn btn-danger btn-xs"
+              >删除</a
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <nav aria-label="Page navigation">
+    <ul class="pagination">
+      {{users_str}}
+    </ul>
+  </nav>
+</div>
+{% endblock content %}

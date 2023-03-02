@@ -1,0 +1,74 @@
+{% extends 'layout.html' %} {% block content %}
+
+<div class="container">
+  <div style="margin-bottom: 10px">
+    <a href="/depart/add" class="btn btn-success">
+      <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+      新建部门</a
+    >
+    <a href="/depart/add_modelform" class="btn btn-success">
+      <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+      新建部门(ModelForm)</a
+    >
+  </div>
+
+  <div class="panel panel-default">
+    <!-- Default panel contents -->
+
+    <div class="panel-heading">
+      <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+      批量上传
+    </div>
+    <div class="panel-body">
+      <form method="post" enctype="multipart/form-data" action="/depart/mult/">
+        {% csrf_token %}
+        <div class="form-group">
+          <input type="file" name="file">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+    
+  </div>
+
+  <div class="panel panel-default">
+    <!-- Default panel contents -->
+
+    <div class="panel-heading">
+      <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+      部门列表
+    </div>
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>部门名称</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for obj in depart %}
+        <tr>
+          <th scope="row">{{ obj.id }}</th>
+          <td>{{ obj.depart }}</td>
+          <td>
+            <a
+              href="/depart/edit?nid={{ obj.id }}"
+              class="btn btn-primary btn-xs"
+              >编辑</a
+            >
+            <a
+              href="/depart/delete?nid={{ obj.id }}"
+              class="btn btn-danger btn-xs"
+              >删除</a
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock content %}

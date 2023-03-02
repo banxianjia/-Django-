@@ -1,0 +1,69 @@
+{% extends 'layout.html' %} {% block content %}
+
+<div class="container">
+  <div style="margin-bottom: 10px">
+    <a href="/admin/add" class="btn btn-success">
+      <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+      新建管理员</a
+    >
+    <form class="navbar-form navbar-right" method="get">
+      <div class="input-group">
+        <input
+          name="q"
+          type="text"
+          class="form-control"
+          placeholder="关键字"
+          value="{{search_value}}"
+        />
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="submit">
+            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+          </button>
+        </span>
+      </div>
+    </form>
+  </div>
+
+  <div class="panel panel-default">
+    <!-- Default panel contents -->
+
+    <div class="panel-heading">
+      <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+      管理员列表
+    </div>
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>昵称</th>
+          <th>密码</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for obj in queryset %}
+        <tr>
+          <th scope="row">{{ obj.id }}</th>
+          <td>{{ obj.username }}</td>
+          <td>*********</td>
+          <td>
+            <a href="../reset/?nid={{obj.id}}" class="btn btn-primary btn-xs"
+              >重置密码</a
+            >
+            <a href="../edit/?nid={{obj.id}}" class="btn btn-primary btn-xs"
+              >编辑</a
+            >
+            <a href="" class="btn btn-danger btn-xs">删除</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <ul class="pagination">
+    {{page_str}}
+  </ul>
+</div>
+
+{% endblock content %}
